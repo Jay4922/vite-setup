@@ -1,0 +1,9 @@
+# Prettier Ignore File
+# Ignore specific files in the assets folder
+assets/application.css.liquid
+# Example - App Files starts name with globo
+**/globo*
+# Other directories to ignore
+node_modules
+dist
+.build

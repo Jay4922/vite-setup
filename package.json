@@ -1,0 +1,36 @@
+{
+	"name": "vite-setup",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+	"format": "prettier --write snippets/ templates/ sections/ layout/ config/ assets/",
+	"lint": "eslint . --ext .js",
+	"prepare": "husky",
+	"build": "npx @tailwindcss/cli -i css/application.css -o assets/application.css.liquid -w -m"
+	},
+	"lint-staged": {
+	"*.js": "eslint --fix",
+	"*.{js,jsx,ts,tsx,css,md,liquid}": "prettier --write"
+ 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Jay4922/vite-setup.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Jay4922/vite-setup/issues"
+	},
+	"homepage": "https://github.com/Jay4922/vite-setup#readme",
+	"description": "",
+	"devDependencies": {
+		"@eslint/js": "^9.39.3",
+		"@shopify/prettier-plugin-liquid": "^1.10.0",
+		"eslint": "^9.39.3",
+		"globals": "^17.3.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"prettier": "^3.8.1"
+	}
+}
