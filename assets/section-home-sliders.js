@@ -1,6 +1,7 @@
 (() => {
   let retryTimer;
   let isLoadingSwiper = false;
+  let isObserverReady = false;
 
   function getScopedControl(container, attrName, fallbackSelector) {
     const explicitSelector = container.getAttribute(attrName);
@@ -50,6 +51,7 @@
       const slidesDesktop =
         kind === "reviews" ? 3 : kind === "wellness" ? 4 : 5;
       const isReviews = kind === "reviews";
+      const slideCount = container.querySelectorAll(".swiper-slide").length;
       const shouldLoop = false;
 
       const config = {
@@ -59,8 +61,8 @@
         observer: true,
         observeParents: true,
         allowTouchMove: true,
-        loop: isReviews ? slideCount > 1 : shouldLoop,
-        rewind: !isReviews,
+        loop: shouldLoop,
+        rewind: !shouldLoop,
         loopAdditionalSlides: shouldLoop ? 2 : 0,
         roundLengths: true,
         centeredSlides: false,
@@ -86,6 +88,11 @@
           },
         },
       };
+
+      if (isReviews && slideCount <= 3) {
+        config.breakpoints[990].slidesPerView = slideCount;
+        config.breakpoints[1800].slidesPerView = slideCount;
+      }
 
       new window.Swiper(container, config);
     });
@@ -144,8 +151,39 @@
 
   window.initHomeSwipers = initWhenReady;
 
+  function observeDomChanges() {
+    if (isObserverReady || !window.MutationObserver) {
+      return;
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      let shouldReinit = false;
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (
+            node.nodeType === 1 &&
+            (node.matches?.("[data-home-swiper]") ||
+              node.querySelector?.("[data-home-swiper]"))
+          ) {
+            shouldReinit = true;
+          }
+        });
+      });
+
+      if (shouldReinit) {
+        initWhenReady(document);
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    isObserverReady = true;
+  }
+
   document.addEventListener("DOMContentLoaded", () => initWhenReady(document));
-  window.addEventListener("load", () => initWhenReady(document));
+  window.addEventListener("load", () => {
+    initWhenReady(document);
+    observeDomChanges();
+  });
   document.addEventListener("shopify:section:load", (event) => {
     initWhenReady(event.target);
   });

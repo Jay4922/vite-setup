@@ -18,7 +18,22 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 1.2rem;
-  color: rgba(var(--color-foreground), 0.8);
+  color: #d91e4f;
+}
+
+.home-section .swiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-section .swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.home-section .swiper-slide {
+  flex-shrink: 0;
+  height: auto;
 }
 
 .home-benefit-strip {
@@ -87,9 +102,9 @@
 }
 
 .home-signature__media {
-  border-radius: 1.2rem;
+  border-radius: 0;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.4);
+  background: transparent;
 }
 
 .home-signature__media img,
@@ -105,6 +120,7 @@
 
 .home-signature__body {
   margin: 1.2rem 0 2rem;
+  max-width: 39rem;
 }
 
 .home-founder__grid {
@@ -115,7 +131,7 @@
 
 .home-founder__header {
   text-align: center;
-  margin-bottom: 2.6rem;
+  margin-bottom: 2.1rem;
 }
 
 .home-founder__text {
@@ -123,8 +139,8 @@
 }
 
 .home-founder__image-wrap {
-  border: 0.2rem solid rgba(var(--color-button), 0.85);
-  border-radius: 1.6rem;
+  border: 0.1rem solid #f05078;
+  border-radius: 0.8rem;
   overflow: hidden;
 }
 
@@ -152,11 +168,11 @@
 }
 
 .home-health-tips__media {
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   overflow: hidden;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  border: 0.1rem solid #3a73cb;
   margin-bottom: 1rem;
-  background: rgba(var(--color-foreground), 0.04);
+  background: #fff;
 }
 
 .home-health-tips__media img,
@@ -169,12 +185,13 @@
 
 .home-health-tips__title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   text-align: center;
+  color: #d91e4f;
 }
 
 .home-health-tips__title a {
-  color: rgba(var(--color-foreground), 0.9);
+  color: #d91e4f;
   text-decoration: none;
 }
 
@@ -191,12 +208,12 @@
 }
 
 .home-slider-button {
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 50%;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.22);
-  background: transparent;
-  color: rgb(var(--color-foreground));
+  border: 0.1rem solid #f05078;
+  background: #fff;
+  color: #f05078;
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -237,9 +254,9 @@
 
 .home-subscribe__item {
   text-align: center;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  border-radius: 1.2rem;
-  padding: 1.8rem 1.2rem;
+  border: 0;
+  border-radius: 0;
+  padding: 0.8rem 0.7rem;
 }
 
 .home-subscribe__icon {
@@ -250,13 +267,13 @@
 }
 
 .home-subscribe__title {
-  margin: 0 0 0.6rem;
-  font-size: 1.55rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
 }
 
 .home-subscribe__text {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.45;
 }
 
@@ -280,7 +297,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 1.2rem;
+  border-radius: 0;
 }
 
 .home-connect__desc {
@@ -289,31 +306,38 @@
 
 .home-connect__form {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.8rem;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
 }
 
 .home-connect__meta {
   margin: 1rem 0 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
   line-height: 1.45;
+  max-width: 50rem;
 }
 
 .home-reviews__card {
   border: 0.1rem solid #3b73c9;
-  border-radius: 1.1rem;
-  padding: 1.7rem;
+  border-radius: 0.6rem;
+  padding: 1.8rem 2rem;
   background: #eef1f4;
-  min-height: 22rem;
+  min-height: 27rem;
   height: 100%;
 }
 
 .home-reviews .home-swiper {
-  padding-inline: 0.2rem;
+  padding-inline: 0.1rem;
+  overflow: hidden;
 }
 
 .home-reviews .swiper-wrapper {
   align-items: stretch;
+}
+
+.home-reviews .swiper-slide {
+  height: auto;
+  width: 100%;
 }
 
 .home-reviews__slider-wrap {
@@ -324,7 +348,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  margin: 0 0 0.9rem;
+  margin: 0 0 1.2rem;
 }
 
 .home-reviews__stars {
@@ -336,34 +360,36 @@
 }
 
 .home-reviews__count {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1;
   color: rgba(var(--color-foreground), 0.7);
 }
 
 .home-reviews__title {
-  margin: 0 0 0.8rem;
-  font-size: 1.7rem;
+  margin: 0 0 1rem;
+  font-size: 3rem;
   line-height: 1.2;
+  font-family: var(--font-heading-family);
+  font-weight: 500;
 }
 
 .home-reviews__text {
-  margin: 0 0 1.2rem;
-  font-size: 1.24rem;
-  line-height: 1.45;
+  margin: 0 0 2rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
   color: rgba(var(--color-foreground), 0.92);
 }
 
 .home-reviews__author {
-  margin: 0 0 0.4rem;
-  font-size: 1.25rem;
+  margin: 0 0 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #0c1118;
 }
 
 .home-reviews__verified {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -371,8 +397,8 @@
 }
 
 .home-reviews__verified-icon {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
   border-radius: 50%;
   border: 0.1rem solid #d91e4f;
   display: inline-grid;
@@ -386,7 +412,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.2rem;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.1rem;
 }
 
 .home-follow-us__handle {
@@ -410,7 +436,7 @@
 .home-follow-us__item img {
   display: block;
   width: 100%;
-  height: 11.5rem;
+  height: 9.5rem;
   object-fit: cover;
 }
 
@@ -418,8 +444,8 @@
   margin-top: 0;
   position: absolute;
   top: 50%;
-  left: -1.4rem;
-  right: -1.4rem;
+  left: -1.6rem;
+  right: -1.6rem;
   transform: translateY(-50%);
   justify-content: space-between;
   pointer-events: none;
@@ -433,6 +459,37 @@
   border-color: #f05078;
   color: #f05078;
   background: #fff;
+}
+
+.home-reviews .swiper-button-lock {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .home-reviews .swiper-slide {
+    width: calc((100% - 3.6rem) / 3);
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .home-reviews__nav {
+    position: static;
+    transform: none;
+    margin-top: 1.2rem;
+    pointer-events: auto;
+  }
+
+  .home-reviews__title {
+    font-size: 2.2rem;
+  }
+
+  .home-reviews__text {
+    font-size: 1.4rem;
+  }
+
+  .home-connect__form {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -465,7 +522,12 @@
   }
 
   .home-follow-us__item img {
-    height: 14rem;
+    height: 12.8rem;
+  }
+
+  .home-reviews__nav {
+    left: -1.2rem;
+    right: -1.2rem;
   }
 }
 

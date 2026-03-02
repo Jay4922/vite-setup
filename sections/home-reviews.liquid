@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<script src="{{ 'section-home-sliders.js' | asset_url }}" defer="defer"></script>
-
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -71,23 +68,6 @@
                 </p>
               </article>
             {%- endfor -%}
-            {%- if review_count < 4 -%}
-              {%- for block in section.blocks -%}
-                <article class="swiper-slide home-reviews__card" aria-hidden="true">
-                  <p class="home-reviews__meta">
-                    <span class="home-reviews__stars">{{ block.settings.stars | escape }}</span>
-                    <span class="home-reviews__count">{{ block.settings.reviews_count | escape }}</span>
-                  </p>
-                  <h3 class="home-reviews__title">{{ block.settings.title | escape }}</h3>
-                  <p class="home-reviews__text">{{ block.settings.text | escape }}</p>
-                  <p class="home-reviews__author">{{ block.settings.author | escape }}</p>
-                  <p class="home-reviews__verified">
-                    <span class="home-reviews__verified-icon" aria-hidden="true">&#10003;</span>
-                    <span>{{ block.settings.verified | escape }}</span>
-                  </p>
-                </article>
-              {%- endfor -%}
-            {%- endif -%}
           {%- endif -%}
         </div>
       </div>

@@ -20,10 +20,10 @@
 
 .home-wellness__tabs {
   display: inline-flex;
-  gap: 0.8rem;
-  padding: 0.6rem;
+  gap: 0.2rem;
+  padding: 0.4rem;
   border-radius: 999px;
-  background: rgba(var(--color-foreground), 0.08);
+  background: #dce5f2;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -32,13 +32,13 @@
   border: 0;
   cursor: pointer;
   border-radius: 999px;
-  min-height: 3.6rem;
-  padding: 0.8rem 1.8rem;
-  font-size: 1.2rem;
+  min-height: 2.9rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgb(var(--color-foreground));
+  color: #0f3061;
   background: transparent;
   transition:
     background-color 0.25s ease,
@@ -46,8 +46,8 @@
 }
 
 .home-wellness__tab[aria-selected="true"] {
-  background: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
+  background: #0e4b8d;
+  color: #fff;
 }
 
 .home-wellness__panel {
@@ -60,7 +60,7 @@
 
 .home-wellness__carousel {
   position: relative;
-  padding: 0 2.4rem;
+  padding: 0 2.8rem;
 }
 
 .home-wellness__swiper {
@@ -69,22 +69,65 @@
 
 .home-wellness__slide {
   height: auto;
+  padding-bottom: 0.6rem;
 }
 
 .home-wellness .card-wrapper {
   height: 100%;
 }
 
+.home-wellness .card,
+.home-wellness .card__inner,
+.home-wellness .card__content {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+.home-wellness .card__information {
+  padding: 0.4rem 0 0;
+  text-align: left;
+}
+
+.home-wellness .card__heading {
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.home-wellness .price {
+  font-size: 1.3rem;
+}
+
+.home-wellness .card__badge {
+  display: none;
+}
+
+.home-wellness .quick-add__submit {
+  border-radius: 999px;
+  border: 0;
+  min-height: 2.8rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: #e61d5f;
+  color: #fff;
+  padding: 0.5rem 1.6rem;
+}
+
+.home-wellness .quick-add__submit:hover {
+  background: #d11a56;
+}
+
 .home-wellness__control {
   position: absolute;
-  top: 40%;
+  top: 34%;
   transform: translateY(-50%);
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border-radius: 50%;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  background: rgba(var(--color-background), 0.96);
-  color: rgb(var(--color-foreground));
+  border: 0.1rem solid #f05078;
+  background: #fff;
+  color: #f05078;
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -92,11 +135,11 @@
 }
 
 .home-wellness__control--prev {
-  left: 0;
+  left: -0.2rem;
 }
 
 .home-wellness__control--next {
-  right: 0;
+  right: -0.2rem;
 }
 
 .home-wellness__empty {
@@ -143,6 +186,10 @@
 
 @media screen and (min-width: 750px) {
   .home-wellness__container {
+    padding: 0 2.8rem;
+  }
+
+  .home-wellness__carousel {
     padding: 0 2.8rem;
   }
 }

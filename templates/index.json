@@ -346,7 +346,8 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "stars": "★★★★★ 100 Reviews",
+            "stars": "★★★★★",
+            "reviews_count": "100 Reviews",
             "title": "Lorem Ipsum",
             "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
             "author": "Customer Name Goes Here",
@@ -356,7 +357,8 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "stars": "★★★★★ 100 Reviews",
+            "stars": "★★★★★",
+            "reviews_count": "100 Reviews",
             "title": "Lorem Ipsum",
             "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
             "author": "Customer Name Goes Here",
@@ -366,7 +368,8 @@
         "review_3": {
           "type": "review",
           "settings": {
-            "stars": "★★★★★ 100 Reviews",
+            "stars": "★★★★★",
+            "reviews_count": "100 Reviews",
             "title": "Lorem Ipsum",
             "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
             "author": "Customer Name Goes Here",
