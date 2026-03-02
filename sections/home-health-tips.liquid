@@ -1,0 +1,180 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  <div class="home-section__container home-health-tips">
+    <header class="home-health-tips__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-section__heading inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="home-section__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </header>
+    <div data-home-swiper-wrap>
+      <div
+        class="home-swiper swiper"
+        data-home-swiper
+        data-swiper-kind="tips"
+        data-swiper-prev=".home-health-tips-prev-{{ section.id }}"
+        data-swiper-next=".home-health-tips-next-{{ section.id }}"
+        data-swiper-pagination=".home-health-tips-pagination-{{ section.id }}"
+      >
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            <article class="swiper-slide home-health-tips__slide" {{ block.shopify_attributes }}>
+              <div class="home-health-tips__media">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 700
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '250, 350, 500, 700',
+                      sizes: '(min-width: 1800px) 19vw, (min-width: 990px) 18vw, (min-width: 750px) 30vw, 74vw'
+                  }}
+                {%- else -%}
+                  <img
+                    src="{{ fallback_image }}"
+                    alt="{{ block.settings.title | escape }}"
+                    loading="lazy"
+                    width="500"
+                    height="500"
+                  >
+                {%- endif -%}
+              </div>
+              <h3 class="home-health-tips__title">
+                {%- if block.settings.url != blank -%}
+                  <a href="{{ block.settings.url }}">{{ block.settings.title | escape }}</a>
+                {%- else -%}
+                  {{ block.settings.title | escape }}
+                {%- endif -%}
+              </h3>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="home-slider-nav">
+        <button
+          class="home-slider-button home-slider-prev home-health-tips-prev-{{ section.id }}"
+          type="button"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&larr;</span>
+        </button>
+        <div class="home-slider-pagination home-health-tips-pagination-{{ section.id }}"></div>
+        <button
+          class="home-slider-button home-slider-next home-health-tips-next-{{ section.id }}"
+          type="button"
+          aria-label="Next"
+        >
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Health Tips Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Health Tips"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "WELLNESS MADE SIMPLE"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tip",
+      "name": "Tip card",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Video Name Goes Here"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Health Tips Slider",
+      "blocks": [{ "type": "tip" }, { "type": "tip" }, { "type": "tip" }, { "type": "tip" }, { "type": "tip" }]
+    }
+  ]
+}
+{% endschema %}

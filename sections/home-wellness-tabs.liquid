@@ -1,0 +1,292 @@
+{{ 'section-home-wellness.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-home-wellness.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="home-wellness color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  data-home-wellness
+>
+  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  <div class="home-wellness__container">
+    <header class="home-wellness__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-wellness__heading inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div
+        class="home-wellness__tabs"
+        role="tablist"
+        aria-label="{{ section.settings.heading | default: 'Product tabs' | escape }}"
+      >
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="home-wellness__tab"
+            role="tab"
+            data-wellness-tab="{{ block.id }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            {% unless forloop.first %}
+              tabindex="-1"
+            {% endunless %}
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_label | escape }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </header>
+
+    {%- if section.blocks.size == 0 -%}
+      <p class="home-wellness__empty">{{ 'Add tab blocks and select a collection for each tab.' }}</p>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- assign tab_collection = block.settings.collection -%}
+      {%- assign scoped_section_id = section.id | append: '-' | append: block.id -%}
+      <div class="home-wellness__panel{% if forloop.first %} is-active{% endif %}" data-wellness-panel="{{ block.id }}">
+        <div class="home-wellness__carousel" data-home-swiper-wrap>
+          <button
+            class="home-wellness__control home-wellness__control--prev home-slider-prev home-wellness-prev-{{ section.id }}-{{ block.id }}"
+            type="button"
+            aria-label="Previous products"
+          >
+            <span aria-hidden="true">&larr;</span>
+          </button>
+          <div
+            class="home-wellness__swiper swiper"
+            data-home-swiper
+            data-swiper-kind="wellness"
+            data-swiper-prev=".home-wellness-prev-{{ section.id }}-{{ block.id }}"
+            data-swiper-next=".home-wellness-next-{{ section.id }}-{{ block.id }}"
+            data-swiper-pagination=".home-wellness-pagination-{{ section.id }}-{{ block.id }}"
+          >
+            <div class="swiper-wrapper">
+              {%- if tab_collection != blank and tab_collection.products_count > 0 -%}
+                {%- for product in tab_collection.products limit: section.settings.products_to_show -%}
+                  <div class="swiper-slide home-wellness__slide">
+                    {% render 'card-product',
+                      card_product: product,
+                      media_aspect_ratio: section.settings.image_ratio,
+                      image_shape: section.settings.image_shape,
+                      lazy_load: true,
+                      show_secondary_image: section.settings.show_secondary_image,
+                      show_vendor: section.settings.show_vendor,
+                      show_rating: section.settings.show_rating,
+                      section_id: scoped_section_id,
+                      quick_add: 'standard'
+                    %}
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..4) -%}
+                  <div class="swiper-slide home-wellness__slide">
+                    <article class="home-wellness__placeholder-card">
+                      <div class="home-wellness__placeholder-media">
+                        <img
+                          src="{{ fallback_image }}"
+                          alt="Placeholder product"
+                          loading="lazy"
+                          width="500"
+                          height="500"
+                        >
+                      </div>
+                      <h3 class="home-wellness__placeholder-title">Product name</h3>
+                      <p class="home-wellness__placeholder-price">$0.00</p>
+                      <button type="button" class="button button--primary home-wellness__placeholder-button" disabled>
+                        {{ section.settings.quick_add_label | escape }}
+                      </button>
+                    </article>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </div>
+          <button
+            class="home-wellness__control home-wellness__control--next home-slider-next home-wellness-next-{{ section.id }}-{{ block.id }}"
+            type="button"
+            aria-label="Next products"
+          >
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+        <div class="home-slider-nav">
+          <div class="home-slider-pagination home-wellness-pagination-{{ section.id }}-{{ block.id }}"></div>
+        </div>
+        {%- if tab_collection == blank -%}
+          <p class="home-wellness__empty">{{ 'Select a collection for this tab.' }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Start Your Wellness",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Start Your Wellness"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "quick_add_label",
+      "label": "Fallback button label",
+      "default": "Quick Add"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "square", "label": "Square" }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "select",
+      "id": "image_shape",
+      "label": "Image shape",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "arch", "label": "Arch" },
+        { "value": "blob", "label": "Blob" },
+        { "value": "chevronleft", "label": "Chevron left" },
+        { "value": "chevronright", "label": "Chevron right" },
+        { "value": "diamond", "label": "Diamond" },
+        { "value": "parallelogram", "label": "Parallelogram" },
+        { "value": "round", "label": "Round" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Collection tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "Best Sellers"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Start Your Wellness",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Best Sellers"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Bundles"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

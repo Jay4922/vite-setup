@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"npx @tailwindcss/cli -i css/application.css -o assets/application.css.liquid -w\" \"shopify theme dev\"",
+    "jp": "concurrently \"vite\" \"npx @tailwindcss/cli -i css/application.css -o assets/application.css.liquid -w\" \"shopify theme dev\"",
     "build": "vite build && npx @tailwindcss/cli -i css/application.css -o assets/application.css.liquid -m",
     "format": "prettier --write snippets/ templates/ sections/ layout/ config/ assets/",
     "lint": "eslint . --ext .js",

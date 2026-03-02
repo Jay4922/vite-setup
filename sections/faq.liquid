@@ -1,0 +1,216 @@
+{{ 'section-faq.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-faq.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="faq color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  data-faq-section
+  data-single-open="{{ section.settings.single_open }}"
+>
+  <div class="faq__container">
+    <header class="faq__header">
+      {%- if section.settings.caption != blank -%}
+        <p class="faq__caption caption-with-letter-spacing">{{ section.settings.caption | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="faq__heading inline-richtext {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="faq__description rte">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </header>
+
+    <ul class="faq__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign is_open = false
+          if section.settings.open_first and forloop.first
+            assign is_open = true
+          endif
+        -%}
+        <li
+          class="faq-item{% if is_open %} is-open{% endif %}"
+          data-initial-open="{{ is_open }}"
+          {{ block.shopify_attributes }}
+        >
+          <h3 class="faq-item__title">
+            <button
+              class="faq-item__trigger"
+              type="button"
+              aria-expanded="{% if is_open %}true{% else %}false{% endif %}"
+              aria-controls="FaqPanel-{{ section.id }}-{{ block.id }}"
+              id="FaqTrigger-{{ section.id }}-{{ block.id }}"
+            >
+              <span class="faq-item__question">{{ block.settings.question | escape }}</span>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div
+            class="faq-item__panel"
+            id="FaqPanel-{{ section.id }}-{{ block.id }}"
+            role="region"
+            aria-labelledby="FaqTrigger-{{ section.id }}-{{ block.id }}"
+            aria-hidden="{% if is_open %}false{% else %}true{% endif %}"
+          >
+            <div class="faq-item__answer rte">{{ block.settings.answer }}</div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "FAQ"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Need help? Find quick answers below.</p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open first question by default",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "single_open",
+      "label": "Keep only one item open at a time",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is your return policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Returns are accepted within 30 days of delivery for unused items in original condition.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard shipping takes 3-7 business days. Expedited options are available at checkout.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I track my order?",
+            "answer": "<p>Yes. Once your order ships, you will receive a tracking link by email.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>We currently ship to select countries. Shipping availability appears automatically during checkout.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

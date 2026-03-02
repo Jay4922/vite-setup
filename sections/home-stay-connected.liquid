@@ -1,0 +1,171 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="home-section home-connect section-{{ section.id }}-padding">
+  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  <div class="home-section__container">
+    <div class="home-connect__grid">
+      <div class="home-connect__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              widths: '350, 550, 750, 1000, 1200',
+              sizes: '(min-width: 990px) 45vw, (min-width: 750px) 48vw, 92vw'
+          }}
+        {%- else -%}
+          <img src="{{ fallback_image }}" alt="E-book placeholder" loading="lazy" width="500" height="500">
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.subheading != blank -%}
+          <p class="home-section__subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="home-section__heading inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="home-connect__desc rte">{{ section.settings.description }}</div>
+        {%- endif -%}
+        {%- form 'customer', class: 'home-connect__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            id="HomeConnectEmail-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="field__input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="HomeConnectError-{{ section.id }}"
+            {% elsif form.posted_successfully? %}
+              aria-describedby="HomeConnectSuccess-{{ section.id }}"
+            {% endif %}
+            placeholder="{{ section.settings.email_placeholder | escape }}"
+            required
+          >
+          <button type="submit" class="button button--primary">{{ section.settings.button_label | escape }}</button>
+          {%- if form.errors -%}
+            <small id="HomeConnectError-{{ section.id }}">
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </small>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <small id="HomeConnectSuccess-{{ section.id }}">{{ 'newsletter.success' | t }}</small>
+          {%- endif -%}
+        {%- endform -%}
+        {%- if section.settings.meta_text != blank -%}
+          <p class="home-connect__meta">{{ section.settings.meta_text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stay Connected",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left image"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "FREE E-BOOK"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Stay Connected To Wellness"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Subscribe to receive updates on new products, exclusive promotions, and wellness insights.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Download Now"
+    },
+    {
+      "type": "text",
+      "id": "meta_text",
+      "label": "Meta text",
+      "default": "By clicking submit, you agree to receive marketing emails from us."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 44
+    }
+  ],
+  "presets": [
+    {
+      "name": "Stay Connected"
+    }
+  ]
+}
+{% endschema %}

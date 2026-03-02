@@ -1,0 +1,155 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  <div class="home-section__container">
+    <header class="home-founder__header">
+      {%- if section.settings.subheading != blank -%}
+        <p class="home-section__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-section__heading inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+    </header>
+    <div class="home-founder__grid">
+      <div>
+        {%- if section.settings.content_heading != blank -%}
+          <h3 class="h3">{{ section.settings.content_heading | escape }}</h3>
+        {%- endif -%}
+        <div class="home-founder__text rte">{{ section.settings.text }}</div>
+        {%- if section.settings.link_label != blank -%}
+          <a
+            {% if section.settings.link_url == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.link_url }}"
+            {% endif %}
+            class="link underlined-link"
+          >
+            {{ section.settings.link_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+      <div class="home-founder__image-wrap">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1100
+            | image_tag:
+              loading: 'lazy',
+              widths: '360, 550, 750, 900, 1100',
+              sizes: '(min-width: 990px) 42vw, (min-width: 750px) 48vw, 94vw'
+          }}
+        {%- else -%}
+          <img src="{{ fallback_image }}" alt="Founder placeholder" loading="lazy" width="500" height="500">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder Story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "MEET STEPHAN KARIAN"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "I'm Committed to Enhancing the Quality of Your Life!"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "content_heading",
+      "label": "Content heading",
+      "default": "Can I Trust You"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Content",
+      "default": "<p>I founded this company to help people feel better with science-backed nutrition and practical wellness strategies.</p><p>My focus is simple: premium quality ingredients, transparent sourcing, and formulas designed for real life.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read More"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Founder image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Founder Story"
+    }
+  ]
+}
+{% endschema %}

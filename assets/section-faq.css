@@ -1,0 +1,136 @@
+.faq {
+  position: relative;
+  z-index: 1;
+}
+
+.faq__container {
+  width: min(100%, 120rem);
+  margin: 0 auto;
+  padding: 0 1.8rem;
+}
+
+.faq__header {
+  margin: 0 auto 2.4rem;
+  max-width: 72rem;
+  text-align: center;
+}
+
+.faq__caption {
+  margin: 0 0 1rem;
+}
+
+.faq__heading {
+  margin: 0;
+}
+
+.faq__description {
+  margin: 1.2rem 0 0;
+}
+
+.faq__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+}
+
+.faq-item {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.1);
+}
+
+.faq-item__trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.2rem;
+  align-items: center;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  padding: 2rem 0;
+}
+
+.faq-item__question {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.2rem + 0.4vw, 2rem);
+  line-height: 1.35;
+}
+
+.faq-item__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  line-height: 1;
+  transition: transform 0.35s ease;
+}
+
+.faq-item.is-open .faq-item__icon {
+  transform: rotate(45deg);
+}
+
+.faq-item__panel {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.42s cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: height;
+}
+
+.faq-item__answer {
+  padding: 0 0 2rem;
+}
+
+.faq-item__answer > *:first-child {
+  margin-top: 0;
+}
+
+.faq-item__answer > *:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .faq__container {
+    padding: 0 2.8rem;
+  }
+
+  .faq__header {
+    margin-bottom: 3.2rem;
+  }
+
+  .faq-item__trigger {
+    padding: 2.2rem 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .faq__container {
+    width: min(100%, 128rem);
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .faq__container {
+    width: min(100%, 148rem);
+  }
+
+  .faq__header {
+    max-width: 82rem;
+  }
+
+  .faq-item__question {
+    font-size: clamp(2.1rem, 1.8rem + 0.3vw, 2.6rem);
+  }
+
+  .faq-item__trigger {
+    padding: 2.6rem 0;
+  }
+
+  .faq-item__answer {
+    max-width: 92%;
+  }
+}

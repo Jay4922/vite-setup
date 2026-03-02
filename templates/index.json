@@ -9,76 +9,419 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "home_hero": {
+      "type": "home-hero",
+      "settings": {
+        "heading": "Supplements You Can Trust",
+        "heading_size": "h0",
+        "text": "<p>Innovating through holistic formulas and advanced nutrition.</p>",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "home_commitment": {
+      "type": "home-commitment",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "badge_1": {
+          "type": "badge",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "text": "Busted"
           }
         },
-        "button": {
-          "type": "buttons",
+        "badge_2": {
+          "type": "badge",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "Made in USA"
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "text": "GMP"
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "text": "Third Party Tested"
+          }
+        },
+        "badge_5": {
+          "type": "badge",
+          "settings": {
+            "text": "Non GMO"
+          }
+        },
+        "badge_6": {
+          "type": "badge",
+          "settings": {
+            "text": "NSF"
+          }
+        },
+        "badge_7": {
+          "type": "badge",
+          "settings": {
+            "text": "FDA Facility"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4",
+        "badge_5",
+        "badge_6",
+        "badge_7"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "heading": "Our Commitment to Quality",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 40
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "home_wellness_tabs": {
+      "type": "home-wellness-tabs",
+      "blocks": {
+        "wellness_tab_1": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Best Sellers"
+          }
+        },
+        "wellness_tab_2": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Bundles"
+          }
+        }
+      },
+      "block_order": [
+        "wellness_tab_1",
+        "wellness_tab_2"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
+        "heading": "Start Your Wellness",
+        "heading_size": "h1",
         "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "quick_add_label": "Quick Add",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    },
+    "home_guesswork": {
+      "type": "home-guesswork",
+      "settings": {
+        "heading": "Take the Guesswork Out of Supplements",
+        "heading_size": "h1",
+        "text": "<p>Answer a few quick questions and get a tailored supplement recommendation based on your goals and lifestyle.</p>",
+        "button_label": "Take Quiz",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
+    "home_benefit_strip": {
+      "type": "home-benefit-strip",
+      "blocks": {
+        "benefit_1": {
+          "type": "item",
+          "settings": {
+            "label": "Lactose Free"
+          }
+        },
+        "benefit_2": {
+          "type": "item",
+          "settings": {
+            "label": "Non GMO"
+          }
+        },
+        "benefit_3": {
+          "type": "item",
+          "settings": {
+            "label": "Keto Friendly"
+          }
+        },
+        "benefit_4": {
+          "type": "item",
+          "settings": {
+            "label": "Gluten Free"
+          }
+        },
+        "benefit_5": {
+          "type": "item",
+          "settings": {
+            "label": "Vegan"
+          }
+        },
+        "benefit_6": {
+          "type": "item",
+          "settings": {
+            "label": "Stimulant Free"
+          }
+        },
+        "benefit_7": {
+          "type": "item",
+          "settings": {
+            "label": "Caffeine Free"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6",
+        "benefit_7"
+      ],
+      "settings": {
+        "padding_top": 4,
+        "padding_bottom": 4
+      }
+    },
+    "home_signature_banner": {
+      "type": "home-signature-banner",
+      "settings": {
+        "heading": "Find Your Signature Supplements",
+        "heading_size": "h1",
+        "text": "<p>Build your ideal routine with targeted supplements designed for your goals.</p>",
+        "button_label": "Shop Now",
+        "button_link": "",
         "padding_top": 44,
-        "padding_bottom": 36
+        "padding_bottom": 44
+      }
+    },
+    "home_founder_story": {
+      "type": "home-founder-story",
+      "settings": {
+        "subheading": "MEET STEPHAN KARIAN",
+        "heading": "I'm Committed to Enhancing the Quality of Your Life!",
+        "heading_size": "h1",
+        "content_heading": "Can I Trust You",
+        "text": "<p>I founded this company to help people feel better with science-backed nutrition and practical wellness strategies.</p><p>My focus is simple: premium quality ingredients, transparent sourcing, and formulas designed for real life.</p>",
+        "link_label": "Read More",
+        "link_url": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 52
+      }
+    },
+    "home_health_tips": {
+      "type": "home-health-tips",
+      "blocks": {
+        "tip_1": {
+          "type": "tip",
+          "settings": {
+            "title": "Video Name Goes Here"
+          }
+        },
+        "tip_2": {
+          "type": "tip",
+          "settings": {
+            "title": "Video Name Goes Here"
+          }
+        },
+        "tip_3": {
+          "type": "tip",
+          "settings": {
+            "title": "Video Name Goes Here"
+          }
+        },
+        "tip_4": {
+          "type": "tip",
+          "settings": {
+            "title": "Video Name Goes Here"
+          }
+        },
+        "tip_5": {
+          "type": "tip",
+          "settings": {
+            "title": "Video Name Goes Here"
+          }
+        }
+      },
+      "block_order": [
+        "tip_1",
+        "tip_2",
+        "tip_3",
+        "tip_4",
+        "tip_5"
+      ],
+      "settings": {
+        "heading": "Health Tips",
+        "subheading": "WELLNESS MADE SIMPLE",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "home_subscribe_save": {
+      "type": "home-subscribe-save",
+      "blocks": {
+        "save_1": {
+          "type": "benefit",
+          "settings": {
+            "title": "Savings",
+            "text": "Save up to 15% on every delivery."
+          }
+        },
+        "save_2": {
+          "type": "benefit",
+          "settings": {
+            "title": "Free Gifts",
+            "text": "Get a free gift with each delivery."
+          }
+        },
+        "save_3": {
+          "type": "benefit",
+          "settings": {
+            "title": "Earn Products",
+            "text": "Join loyalty rewards and redeem points."
+          }
+        },
+        "save_4": {
+          "type": "benefit",
+          "settings": {
+            "title": "Flexibility",
+            "text": "Skip, swap, or cancel anytime."
+          }
+        },
+        "save_5": {
+          "type": "benefit",
+          "settings": {
+            "title": "Money Back",
+            "text": "Try risk-free with our quality promise."
+          }
+        }
+      },
+      "block_order": [
+        "save_1",
+        "save_2",
+        "save_3",
+        "save_4",
+        "save_5"
+      ],
+      "settings": {
+        "heading": "Subscribe & Save",
+        "description": "<p>Get big savings, free gifts, and guaranteed quality when you subscribe to your wellness routine.</p>",
+        "heading_size": "h1",
+        "button_label": "Learn More",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 56
+      }
+    },
+    "home_stay_connected": {
+      "type": "home-stay-connected",
+      "settings": {
+        "subheading": "FREE E-BOOK",
+        "heading": "Stay Connected To Wellness",
+        "heading_size": "h1",
+        "description": "<p>Subscribe to receive updates on new products, exclusive promotions, and wellness insights.</p>",
+        "email_placeholder": "Enter your email",
+        "button_label": "Download Now",
+        "meta_text": "By clicking submit, you agree to receive marketing emails from us.",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "home_reviews": {
+      "type": "home-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★ 100 Reviews",
+            "title": "Lorem Ipsum",
+            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
+            "author": "Customer Name Goes Here",
+            "verified": "Verified Buyer"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★ 100 Reviews",
+            "title": "Lorem Ipsum",
+            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
+            "author": "Customer Name Goes Here",
+            "verified": "Verified Buyer"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★ 100 Reviews",
+            "title": "Lorem Ipsum",
+            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
+            "author": "Customer Name Goes Here",
+            "verified": "Verified Buyer"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "subheading": "REVIEWS",
+        "heading": "What People Are Saying",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 60
+      }
+    },
+    "home_follow_us": {
+      "type": "home-follow-us",
+      "blocks": {
+        "follow_1": { "type": "image", "settings": {} },
+        "follow_2": { "type": "image", "settings": {} },
+        "follow_3": { "type": "image", "settings": {} },
+        "follow_4": { "type": "image", "settings": {} },
+        "follow_5": { "type": "image", "settings": {} },
+        "follow_6": { "type": "image", "settings": {} }
+      },
+      "block_order": ["follow_1", "follow_2", "follow_3", "follow_4", "follow_5", "follow_6"],
+      "settings": {
+        "heading": "Follow Us",
+        "handle_text": "@greatamericanproducts",
+        "handle_link": "",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 24
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "home_hero",
+    "home_commitment",
+    "home_wellness_tabs",
+    "home_guesswork",
+    "home_benefit_strip",
+    "home_signature_banner",
+    "home_founder_story",
+    "home_health_tips",
+    "home_subscribe_save",
+    "home_stay_connected",
+    "home_reviews",
+    "home_follow_us"
   ]
 }

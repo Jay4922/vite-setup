@@ -1,0 +1,195 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="home-section__container home-subscribe">
+    <header class="home-subscribe__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="home-section__heading inline-richtext {{ section.settings.heading_size }}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="home-subscribe__desc rte">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </header>
+    <ul class="home-subscribe__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="home-subscribe__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            {{
+              block.settings.icon
+              | image_url: width: 96
+              | image_tag: class: 'home-subscribe__icon', loading: 'lazy', widths: '48, 72, 96'
+            }}
+          {%- endif -%}
+          <h3 class="home-subscribe__title">{{ block.settings.title | escape }}</h3>
+          <p class="home-subscribe__text">{{ block.settings.text | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.button_label != blank -%}
+      <div class="home-subscribe__cta">
+        <a
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+          class="button button--primary"
+        >
+          {{ section.settings.button_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Subscribe and Save",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Get big savings, free gifts, and guaranteed quality when you subscribe to your wellness routine.</p>"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Savings"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Save up to 15% on every delivery."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscribe and Save",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Savings",
+            "text": "Save up to 15% on every delivery."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Free Gifts",
+            "text": "Get a free gift with each delivery."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Earn Products",
+            "text": "Join loyalty rewards and redeem points."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Flexibility",
+            "text": "Skip, swap, or cancel anytime."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "title": "Money Back",
+            "text": "Try risk-free with our quality promise."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

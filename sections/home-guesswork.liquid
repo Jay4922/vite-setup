@@ -1,0 +1,168 @@
+{{ 'section-home-guesswork.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="home-guesswork color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  <div class="home-guesswork__container">
+    <div class="home-guesswork__grid">
+      <div class="home-guesswork__media-grid">
+        {%- for index in (1..4) -%}
+          {%- liquid
+            assign image_key = 'image_' | append: index
+            assign image_value = section.settings[image_key]
+          -%}
+          <div class="home-guesswork__media">
+            {%- if image_value != blank -%}
+              {{
+                image_value
+                | image_url: width: 800
+                | image_tag: loading: 'lazy', widths: '220, 320, 480, 640, 800', sizes: '(min-width: 750px) 24vw, 46vw'
+              }}
+            {%- else -%}
+              <img src="{{ fallback_image }}" alt="Placeholder lifestyle image" loading="lazy" width="500" height="500">
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="home-guesswork__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="home-guesswork__heading inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="home-guesswork__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.button_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+            class="button button--primary home-guesswork__button"
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Take the Guesswork",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Take the Guesswork Out of Supplements"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Answer a few quick questions and get a tailored supplement recommendation based on your goals and lifestyle.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Take Quiz"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image 4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Take the Guesswork"
+    }
+  ]
+}
+{% endschema %}
