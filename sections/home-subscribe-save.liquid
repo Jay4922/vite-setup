@@ -12,7 +12,13 @@
   }
 {%- endstyle -%}
 
-<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+<section
+  class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  style="
+    --home-subscribe-title: {{ section.settings.title_color }};
+    --home-subscribe-text: {{ section.settings.text_color }};
+  "
+>
   <div class="home-section__container home-subscribe">
     <header class="home-subscribe__header">
       {%- if section.settings.heading != blank -%}
@@ -101,6 +107,18 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Benefit title color",
+      "default": "#001A38"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Benefit text color",
+      "default": "#001A38"
     },
     {
       "type": "range",

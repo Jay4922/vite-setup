@@ -14,8 +14,18 @@
   }
 {%- endstyle -%}
 
-<section class="home-hero section-{{ section.id }}-padding">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-hero section-{{ section.id }}-padding"
+  style="
+    --home-hero-bg: {{ section.settings.background_color }};
+    --home-hero-text: {{ section.settings.text_color }};
+    --home-hero-heading: {{ section.settings.heading_color }};
+    --home-hero-copy: {{ section.settings.copy_color }};
+    --home-hero-button-bg: {{ section.settings.button_bg_color }};
+    --home-hero-button-text: {{ section.settings.button_text_color }};
+  "
+>
+  {%- assign fallback_image = 'home-hero-master-green.png' | asset_url -%}
   <div class="home-hero__container">
     <div class="home-hero__grid">
       <div class="home-hero__content">
@@ -106,6 +116,42 @@
       "type": "image_picker",
       "id": "image",
       "label": "Hero image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#EFBFD0"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#001A38"
+    },
+    {
+      "type": "color",
+      "id": "copy_color",
+      "label": "Description color",
+      "default": "#001A38"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Base text color",
+      "default": "#001A38"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#D91E4F"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
     },
     {
       "type": "range",

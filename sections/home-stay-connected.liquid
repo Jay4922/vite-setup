@@ -12,8 +12,14 @@
   }
 {%- endstyle -%}
 
-<section class="home-section home-connect section-{{ section.id }}-padding">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-section home-connect section-{{ section.id }}-padding"
+  style="
+    --home-connect-bg: {{ section.settings.background_color }};
+    --home-accent: {{ section.settings.accent_color }};
+  "
+>
+  {%- assign fallback_image = 'home-stay-connected-book.png' | asset_url -%}
   <div class="home-section__container">
     <div class="home-connect__grid">
       <div class="home-connect__media">
@@ -27,7 +33,7 @@
               sizes: '(min-width: 990px) 45vw, (min-width: 750px) 48vw, 92vw'
           }}
         {%- else -%}
-          <img src="{{ fallback_image }}" alt="E-book placeholder" loading="lazy" width="500" height="500">
+          <img src="{{ fallback_image }}" alt="Free wellness e-book" loading="lazy" width="241" height="344">
         {%- endif -%}
       </div>
       <div>
@@ -140,6 +146,18 @@
       "id": "meta_text",
       "label": "Meta text",
       "default": "By clicking submit, you agree to receive marketing emails from us."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#DCE9F7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#D91E4F"
     },
     {
       "type": "range",

@@ -12,7 +12,17 @@
   }
 {%- endstyle -%}
 
-<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+<section
+  class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  style="
+    --home-accent: {{ section.settings.accent_color }};
+    --home-slider-arrow: {{ section.settings.arrow_color }};
+    --home-reviews-card-bg: {{ section.settings.card_background_color }};
+    --home-reviews-card-border: {{ section.settings.card_border_color }};
+    --home-reviews-stars: {{ section.settings.stars_color }};
+    --home-reviews-verified: {{ section.settings.verified_color }};
+  "
+>
   <div class="home-section__container home-reviews">
     <header class="home-reviews__header">
       {%- if section.settings.subheading != blank -%}
@@ -41,11 +51,12 @@
                   <span class="home-reviews__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                   <span class="home-reviews__count">100 Reviews</span>
                 </p>
-                <h3 class="home-reviews__title">Lorem Ipsum</h3>
+                <h3 class="home-reviews__title">Trusted Quality</h3>
                 <p class="home-reviews__text">
-                  Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.
+                  I have tried many brands and this one is the most consistent for ingredients, quality, and daily
+                  results.
                 </p>
-                <p class="home-reviews__author">Customer Name Goes Here</p>
+                <p class="home-reviews__author">Sarah L.</p>
                 <p class="home-reviews__verified">
                   <span class="home-reviews__verified-icon" aria-hidden="true">&#10003;</span>
                   <span>Verified Buyer</span>
@@ -127,6 +138,42 @@
       "default": "scheme-1"
     },
     {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#D91E4F"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Slider arrow color",
+      "default": "#F05078"
+    },
+    {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card background",
+      "default": "#EEF1F4"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#3B73C9"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Stars color",
+      "default": "#F5CD27"
+    },
+    {
+      "type": "color",
+      "id": "verified_color",
+      "label": "Verified badge color",
+      "default": "#D91E4F"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -169,19 +216,19 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Lorem Ipsum"
+          "default": "Trusted Quality"
         },
         {
           "type": "textarea",
           "id": "text",
           "label": "Review text",
-          "default": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et."
+          "default": "I have tried many brands and this one is the most consistent for ingredients, quality, and daily results."
         },
         {
           "type": "text",
           "id": "author",
           "label": "Author",
-          "default": "Customer Name Goes Here"
+          "default": "Sarah L."
         },
         {
           "type": "text",

@@ -14,7 +14,15 @@
   }
 {%- endstyle -%}
 
-<section class="home-commitment color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<section
+  class="home-commitment color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  style="
+    --home-commitment-bg: {{ section.settings.background_color }};
+    --home-commitment-heading: {{ section.settings.heading_color }};
+    --home-commitment-text: {{ section.settings.text_color }};
+    --home-commitment-icon-height: {{ section.settings.icon_height }}px;
+  "
+>
   <div class="home-commitment__container">
     {%- if section.settings.heading != blank -%}
       <h2 class="home-commitment__heading inline-richtext {{ section.settings.heading_size }}">
@@ -84,6 +92,34 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "icon_height",
+      "min": 40,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge icon height",
+      "default": 80
     },
     {
       "type": "range",

@@ -12,8 +12,11 @@
   }
 {%- endstyle -%}
 
-<section class="home-section home-signature section-{{ section.id }}-padding">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-section home-signature section-{{ section.id }}-padding"
+  style="--home-signature-bg: {{ section.settings.background_color }};"
+>
+  {%- assign fallback_image = 'home-signature-products.jpg' | asset_url -%}
   <div class="home-section__container">
     <div class="home-signature__grid">
       <div class="home-signature__media">
@@ -31,8 +34,8 @@
             src="{{ fallback_image }}"
             alt="Signature supplements placeholder"
             loading="lazy"
-            width="500"
-            height="500"
+            width="2436"
+            height="1311"
           >
         {%- endif -%}
       </div>
@@ -106,6 +109,12 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#DCE9F7"
     },
     {
       "type": "range",

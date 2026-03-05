@@ -14,8 +14,20 @@
   }
 {%- endstyle -%}
 
-<section class="home-guesswork color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-guesswork color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  style="
+    --home-guesswork-bg: {{ section.settings.background_color }};
+    --home-guesswork-heading: {{ section.settings.heading_color }};
+    --home-guesswork-copy: {{ section.settings.copy_color }};
+    --home-guesswork-text: {{ section.settings.text_color }};
+    --home-guesswork-button-bg: {{ section.settings.button_background_color }};
+    --home-guesswork-button-text: {{ section.settings.button_text_color }};
+  "
+>
+  {%- assign fallback_images = 'home-guesswork-1.jpg|home-guesswork-2.jpg|home-guesswork-3.jpg|home-guesswork-4.jpg'
+    | split: '|'
+  -%}
   <div class="home-guesswork__container">
     <div class="home-guesswork__grid">
       <div class="home-guesswork__media-grid">
@@ -32,7 +44,9 @@
                 | image_tag: loading: 'lazy', widths: '220, 320, 480, 640, 800', sizes: '(min-width: 750px) 24vw, 46vw'
               }}
             {%- else -%}
-              <img src="{{ fallback_image }}" alt="Placeholder lifestyle image" loading="lazy" width="500" height="500">
+              {%- assign fallback_index = index | minus: 1 -%}
+              {%- assign fallback_image = fallback_images[fallback_index] | asset_url -%}
+              <img src="{{ fallback_image }}" alt="Lifestyle image" loading="lazy" width="512" height="342">
             {%- endif -%}
           </div>
         {%- endfor -%}
@@ -137,6 +151,42 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "copy_color",
+      "label": "Description color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Base text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#D71E47"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
     },
     {
       "type": "range",

@@ -12,8 +12,18 @@
   }
 {%- endstyle -%}
 
-<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  style="
+    --home-accent: {{ section.settings.accent_color }};
+    --home-tips-card-border: {{ section.settings.card_border_color }};
+    --home-tips-title: {{ section.settings.title_color }};
+    --home-slider-arrow: {{ section.settings.arrow_color }};
+  "
+>
+  {%- assign fallback_images = 'home-tip-1.jpg|home-tip-2.jpg|home-tip-3.jpg|home-tip-4.jpg|home-tip-5.jpg'
+    | split: '|'
+  -%}
   <div class="home-section__container home-health-tips">
     <header class="home-health-tips__header">
       {%- if section.settings.heading != blank -%}
@@ -48,12 +58,14 @@
                       sizes: '(min-width: 1800px) 19vw, (min-width: 990px) 18vw, (min-width: 750px) 30vw, 74vw'
                   }}
                 {%- else -%}
+                  {%- assign fallback_index = forloop.index0 | modulo: fallback_images.size -%}
+                  {%- assign fallback_image = fallback_images[fallback_index] | asset_url -%}
                   <img
                     src="{{ fallback_image }}"
                     alt="{{ block.settings.title | escape }}"
                     loading="lazy"
-                    width="500"
-                    height="500"
+                    width="305"
+                    height="164"
                   >
                 {%- endif -%}
               </div>
@@ -125,6 +137,30 @@
       "default": "scheme-1"
     },
     {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#D91E4F"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#3A73CB"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title color",
+      "default": "#D91E4F"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Slider arrow color",
+      "default": "#F05078"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -160,7 +196,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Video Name Goes Here"
+          "default": "How to Build a Better Morning Supplement Routine"
         },
         {
           "type": "url",

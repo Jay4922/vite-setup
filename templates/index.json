@@ -100,10 +100,7 @@
           }
         }
       },
-      "block_order": [
-        "wellness_tab_1",
-        "wellness_tab_2"
-      ],
+      "block_order": ["wellness_tab_1", "wellness_tab_2"],
       "settings": {
         "heading": "Start Your Wellness",
         "heading_size": "h1",
@@ -225,41 +222,35 @@
         "tip_1": {
           "type": "tip",
           "settings": {
-            "title": "Video Name Goes Here"
+            "title": "How to Build a Better Morning Supplement Routine"
           }
         },
         "tip_2": {
           "type": "tip",
           "settings": {
-            "title": "Video Name Goes Here"
+            "title": "3 Nutrition Habits to Boost Daily Energy"
           }
         },
         "tip_3": {
           "type": "tip",
           "settings": {
-            "title": "Video Name Goes Here"
+            "title": "Joint Support Essentials for Active Adults"
           }
         },
         "tip_4": {
           "type": "tip",
           "settings": {
-            "title": "Video Name Goes Here"
+            "title": "What to Look for in a Quality Multivitamin"
           }
         },
         "tip_5": {
           "type": "tip",
           "settings": {
-            "title": "Video Name Goes Here"
+            "title": "Hydration, Recovery, and Performance Basics"
           }
         }
       },
-      "block_order": [
-        "tip_1",
-        "tip_2",
-        "tip_3",
-        "tip_4",
-        "tip_5"
-      ],
+      "block_order": ["tip_1", "tip_2", "tip_3", "tip_4", "tip_5"],
       "settings": {
         "heading": "Health Tips",
         "subheading": "WELLNESS MADE SIMPLE",
@@ -308,13 +299,7 @@
           }
         }
       },
-      "block_order": [
-        "save_1",
-        "save_2",
-        "save_3",
-        "save_4",
-        "save_5"
-      ],
+      "block_order": ["save_1", "save_2", "save_3", "save_4", "save_5"],
       "settings": {
         "heading": "Subscribe & Save",
         "description": "<p>Get big savings, free gifts, and guaranteed quality when you subscribe to your wellness routine.</p>",
@@ -348,9 +333,9 @@
           "settings": {
             "stars": "★★★★★",
             "reviews_count": "100 Reviews",
-            "title": "Lorem Ipsum",
-            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
-            "author": "Customer Name Goes Here",
+            "title": "Noticeable Energy Difference",
+            "text": "Within two weeks I felt more consistent energy and less afternoon crash. The quality and ingredients are exactly what I was looking for.",
+            "author": "Michael R.",
             "verified": "Verified Buyer"
           }
         },
@@ -359,9 +344,9 @@
           "settings": {
             "stars": "★★★★★",
             "reviews_count": "100 Reviews",
-            "title": "Lorem Ipsum",
-            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
-            "author": "Customer Name Goes Here",
+            "title": "Great Results and Easy to Use",
+            "text": "I love that the formulas are straightforward and effective. Shipping is fast and subscription management is simple.",
+            "author": "Danielle T.",
             "verified": "Verified Buyer"
           }
         },
@@ -370,18 +355,14 @@
           "settings": {
             "stars": "★★★★★",
             "reviews_count": "100 Reviews",
-            "title": "Lorem Ipsum",
-            "text": "Lorem ipsum dolor sit amet consectetur. Cursus lorem nunc ac nibh tellus viverra et.",
-            "author": "Customer Name Goes Here",
+            "title": "Trusted Quality",
+            "text": "I’ve tried many brands and this one is the most consistent. Product quality, taste, and support have all been excellent.",
+            "author": "Sarah L.",
             "verified": "Verified Buyer"
           }
         }
       },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3"
-      ],
+      "block_order": ["review_1", "review_2", "review_3"],
       "settings": {
         "subheading": "REVIEWS",
         "heading": "What People Are Saying",
@@ -401,7 +382,14 @@
         "follow_5": { "type": "image", "settings": {} },
         "follow_6": { "type": "image", "settings": {} }
       },
-      "block_order": ["follow_1", "follow_2", "follow_3", "follow_4", "follow_5", "follow_6"],
+      "block_order": [
+        "follow_1",
+        "follow_2",
+        "follow_3",
+        "follow_4",
+        "follow_5",
+        "follow_6"
+      ],
       "settings": {
         "heading": "Follow Us",
         "handle_text": "@greatamericanproducts",

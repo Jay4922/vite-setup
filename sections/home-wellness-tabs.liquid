@@ -23,8 +23,22 @@
 <section
   class="home-wellness color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
   data-home-wellness
+  style="
+    --home-wellness-bg: {{ section.settings.background_color }};
+    --home-wellness-tabs-bg: {{ section.settings.tabs_background_color }};
+    --home-wellness-tab-text: {{ section.settings.tab_text_color }};
+    --home-wellness-tab-active-bg: {{ section.settings.tab_active_background_color }};
+    --home-wellness-tab-active-text: {{ section.settings.tab_active_text_color }};
+    --home-wellness-title: {{ section.settings.product_title_color }};
+    --home-wellness-price: {{ section.settings.price_color }};
+    --home-wellness-button-bg: {{ section.settings.button_background_color }};
+    --home-wellness-button-text: {{ section.settings.button_text_color }};
+    --home-wellness-arrow-color: {{ section.settings.arrow_color }};
+  "
 >
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+  {%- assign fallback_images = 'home-product-master-green.png|home-product-master-cell.png|home-product-nitro.png|home-product-master-green-alt.png'
+    | split: '|'
+  -%}
   <div class="home-wellness__container">
     <header class="home-wellness__header">
       {%- if section.settings.heading != blank -%}
@@ -84,21 +98,75 @@
               {%- if tab_collection != blank and tab_collection.products_count > 0 -%}
                 {%- for product in tab_collection.products limit: section.settings.products_to_show -%}
                   <div class="swiper-slide home-wellness__slide">
-                    {% render 'card-product',
-                      card_product: product,
-                      media_aspect_ratio: section.settings.image_ratio,
-                      image_shape: section.settings.image_shape,
-                      lazy_load: true,
-                      show_secondary_image: section.settings.show_secondary_image,
-                      show_vendor: section.settings.show_vendor,
-                      show_rating: section.settings.show_rating,
-                      section_id: scoped_section_id,
-                      quick_add: 'standard'
-                    %}
+                    <article class="home-wellness__product-card">
+                      <a class="home-wellness__image-link" href="{{ product.url }}">
+                        <div class="home-wellness__image-wrap">
+                          {%- if product.featured_image != blank -%}
+                            {{
+                              product.featured_image
+                              | image_url: width: 640
+                              | image_tag:
+                                loading: 'lazy',
+                                widths: '220, 320, 460, 640',
+                                sizes: '(min-width: 990px) 18vw, (min-width: 750px) 30vw, 72vw',
+                                class: 'home-wellness__image'
+                            }}
+                          {%- else -%}
+                            {%- assign fallback_index = forloop.index0 | modulo: fallback_images.size -%}
+                            {%- assign fallback_image = fallback_images[fallback_index] | asset_url -%}
+                            <img
+                              class="home-wellness__image"
+                              src="{{ fallback_image }}"
+                              alt="{{ product.title | escape }}"
+                              loading="lazy"
+                              width="242"
+                              height="430"
+                            >
+                          {%- endif -%}
+                        </div>
+                      </a>
+                      <div class="home-wellness__product-info">
+                        <p class="home-wellness__badge">{{ section.settings.tag_label | escape }}</p>
+                        <h3 class="home-wellness__product-title">
+                          <a href="{{ product.url }}">{{ product.title | escape }}</a>
+                        </h3>
+                        <p class="home-wellness__stars">{{ section.settings.stars_text | escape }}</p>
+                        <p class="home-wellness__product-price">{{ product.price | money }}</p>
+                        {%- assign first_variant = product.selected_or_first_available_variant -%}
+                        {%- if first_variant != blank and product.has_only_default_variant -%}
+                          <product-form data-section-id="{{ scoped_section_id }}">
+                            {%-
+                              form 'product',
+                              product,
+                              id: 'QuickAdd-' | append: scoped_section_id | append: '-' | append: product.id,
+                              class: 'home-wellness__product-form'
+                            -%}
+                              <input type="hidden" name="id" value="{{ first_variant.id }}">
+                              <button
+                                type="submit"
+                                name="add"
+                                class="home-wellness__quick-add"
+                                {% unless first_variant.available %}
+                                  disabled
+                                {% endunless %}
+                              >
+                                {{ section.settings.quick_add_label | escape }}
+                              </button>
+                            {%- endform -%}
+                          </product-form>
+                        {%- else -%}
+                          <a class="home-wellness__quick-add" href="{{ product.url }}">
+                            {{ section.settings.quick_add_label | escape }}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    </article>
                   </div>
                 {%- endfor -%}
               {%- else -%}
                 {%- for i in (1..4) -%}
+                  {%- assign fallback_index = forloop.index0 | modulo: fallback_images.size -%}
+                  {%- assign fallback_image = fallback_images[fallback_index] | asset_url -%}
                   <div class="swiper-slide home-wellness__slide">
                     <article class="home-wellness__placeholder-card">
                       <div class="home-wellness__placeholder-media">
@@ -106,8 +174,8 @@
                           src="{{ fallback_image }}"
                           alt="Placeholder product"
                           loading="lazy"
-                          width="500"
-                          height="500"
+                          width="242"
+                          height="430"
                         >
                       </div>
                       <h3 class="home-wellness__placeholder-title">Product name</h3>
@@ -179,6 +247,18 @@
       "default": "Quick Add"
     },
     {
+      "type": "text",
+      "id": "tag_label",
+      "label": "Badge label",
+      "default": "Best Seller"
+    },
+    {
+      "type": "text",
+      "id": "stars_text",
+      "label": "Stars text",
+      "default": "★★★★★"
+    },
+    {
       "type": "select",
       "id": "image_ratio",
       "label": "Image ratio",
@@ -228,6 +308,66 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "tabs_background_color",
+      "label": "Tabs background",
+      "default": "#E2E9F1"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Tab text color",
+      "default": "#124A88"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_background_color",
+      "label": "Active tab background",
+      "default": "#124A88"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text_color",
+      "label": "Active tab text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product title color",
+      "default": "#124A88"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#001A38"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Quick add button background",
+      "default": "#D71E47"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Quick add button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Slider arrow color",
+      "default": "#D71E47"
     },
     {
       "type": "range",

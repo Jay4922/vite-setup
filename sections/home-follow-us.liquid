@@ -12,8 +12,16 @@
   }
 {%- endstyle -%}
 
-<section class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
-  {%- assign fallback_image = 'https://cdn.shopify.com/s/files/1/0978/6903/7879/files/500x500.png?v=1772445265' -%}
+<section
+  class="home-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  style="
+    --home-accent: {{ section.settings.accent_color }};
+    --home-follow-handle: {{ section.settings.handle_color }};
+  "
+>
+  {%- assign fallback_images = 'home-follow-1.jpg|home-follow-2.jpg|home-follow-3.jpg|home-follow-4.jpg|home-follow-5.jpg|home-follow-6.png'
+    | split: '|'
+  -%}
   <div class="home-section__container home-follow-us">
     <header class="home-follow-us__header">
       <h2 class="home-section__heading inline-richtext {{ section.settings.heading_size }}">
@@ -41,7 +49,9 @@
                 sizes: '(min-width: 1200px) 14vw, (min-width: 750px) 20vw, 38vw'
             }}
           {%- else -%}
-            <img src="{{ fallback_image }}" alt="Follow us image" loading="lazy" width="500" height="500">
+            {%- assign fallback_index = forloop.index0 | modulo: fallback_images.size -%}
+            {%- assign fallback_image = fallback_images[fallback_index] | asset_url -%}
+            <img src="{{ fallback_image }}" alt="Follow us image" loading="lazy" width="342" height="512">
           {%- endif -%}
         </a>
       {%- endfor -%}
@@ -87,6 +97,18 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#D91E4F"
+    },
+    {
+      "type": "color",
+      "id": "handle_color",
+      "label": "Handle color",
+      "default": "#2D79D9"
     },
     {
       "type": "range",

@@ -14,7 +14,14 @@
   }
 {%- endstyle -%}
 
-<section class="home-section home-benefit-strip section-{{ section.id }}-padding">
+<section
+  class="home-section home-benefit-strip section-{{ section.id }}-padding"
+  style="
+    --home-benefit-bg: {{ section.settings.background_color }};
+    --home-benefit-text: {{ section.settings.text_color }};
+    --home-benefit-icon-size: {{ section.settings.icon_size }}px;
+  "
+>
   <div class="home-section__container">
     <div
       class="home-benefit-strip__marquee"
@@ -45,6 +52,28 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#124A88"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 28
+    },
     {
       "type": "range",
       "id": "marquee_speed",
